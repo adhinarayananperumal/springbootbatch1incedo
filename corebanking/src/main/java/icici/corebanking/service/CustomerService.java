@@ -2,6 +2,7 @@ package icici.corebanking.service;
 
 import java.util.List;
 
+import icici.corebanking.entity.Customer;
 import icici.corebanking.pojo.CustomerPojo;
 
 public interface CustomerService {
@@ -15,5 +16,8 @@ public interface CustomerService {
 	void update (CustomerPojo customerPojo);
 	
 	void delete (int cusId);
+	
+    List<CustomerPojo> findByCustomerNameIgnoreCase(String customerName);
+
 
 }

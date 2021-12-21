@@ -15,17 +15,15 @@ import icici.corebanking.service.CustomerService;
 
 @RestController
 public class CustomerController {
-	
-	
+
 	@Autowired
 	CustomerService customerService;
-
 
 	@GetMapping(value = "/welcome")
 	public String welcomeCall() {
 		return "Welcome to Citi Bank";
 	}
-	
+
 	@PostMapping(value = "/save")
 	public CustomerPojo saveCustomer(@RequestBody CustomerPojo customerPojo) {
 
@@ -44,7 +42,6 @@ public class CustomerController {
 
 	@GetMapping("/list")
 	public List<CustomerPojo> listCustomer() {
-
 		List<CustomerPojo> listCustomer = customerService.listCustomer();
 
 		return listCustomer;
@@ -64,6 +61,19 @@ public class CustomerController {
 		return "Customer deleted successfully with customer id " + customerId;
 	}
 
+	@GetMapping("/api/getCustomerListByName/{customerName}")
+	public List<CustomerPojo> findByCustomerNameIgnoreCase(@PathVariable("customerName") String customerName) {
 
-	
+		List<CustomerPojo> listCustomer = customerService.findByCustomerNameIgnoreCase(customerName);
+
+		return listCustomer;
+	}
+
+	@PostMapping("/api/search")
+	public List<CustomerPojo> search(@RequestBody CustomerPojo customerPojo) {
+		List<CustomerPojo> listCustomer = customerService.listCustomer();
+
+		return listCustomer;
+	}
+
 }

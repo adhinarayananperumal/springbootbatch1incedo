@@ -70,13 +70,32 @@ public class CustomerServiceImpl implements CustomerService {
 		Customer customer = customerReopository.getById(customerPojo.getCid());
 		customer.setCustomerName(customerPojo.getCustomerName());
 		customer.setAge(customerPojo.getAge());
-
 	}
 
 	@Override
 	public void delete(int cusId) {
 		customerReopository.deleteById(Integer.valueOf(cusId));
 	}
+
+	@Override
+	public List<CustomerPojo> findByCustomerNameIgnoreCase(String customerName) {
+		// TODO Auto-generated method stub
+		List<CustomerPojo> customerPojoList = new ArrayList<CustomerPojo>();
+
+		List<Customer> customerList 	= customerReopository.findByCustomerNameIgnoreCase(customerName);
+		for (Customer customer : customerList) {
+			CustomerPojo customerPojo = new CustomerPojo();
+			customerPojo.setCid(customer.getCid());
+			customerPojo.setCustomerName(customer.getCustomerName());
+			customerPojo.setAge(customer.getAge());
+
+			customerPojoList.add(customerPojo);
+		}
+
+		return customerPojoList;	
+		}
+	
+	
 
 
 }
